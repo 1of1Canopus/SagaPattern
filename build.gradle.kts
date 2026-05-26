@@ -25,6 +25,7 @@ ext {
 dependencies {
     // Web
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     // Persistence
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
