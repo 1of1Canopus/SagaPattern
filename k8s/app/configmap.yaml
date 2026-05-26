@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: saga-pattern-config
+  namespace: saga-pattern
+data:
+  AXON_AXONSERVER_SERVERS: "axon-server.saga-pattern.svc.cluster.local:8124"
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: "kafka.saga-pattern.svc.cluster.local:9092"
+  SPRING_DATASOURCE_URL: "jdbc:h2:mem:sagadb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"
+  SPRING_JPA_HIBERNATE_DDL_AUTO: "create-drop"
+  LOGGING_LEVEL_IO_HOUSEDEVINCI: "DEBUG"

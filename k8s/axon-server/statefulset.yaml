@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: axon-server
+  namespace: saga-pattern
+spec:
+  serviceName: axon-server
+  replicas: 1
+  selector:
+    matchLabels:
+      app: axon-server
+  template:
+    metadata:
+      labels:
+        app: axon-server
+    spec:
+      containers:
+        - name: axon-server
+          image: axoniq/axonserver:latest
+          ports:
+            - containerPort: 8024
+              name: http
+            - containerPort: 8124
+              name: grpc
+          env:
+            - name: AXONIQ_AXONSERVER_STANDALONE
+              value: "true"
+          volumeMounts:
+            - name: axon-data
+              mountPath: /axonserver/data
+            - name: axon-events
+              mountPath: /axonserver/events
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8024
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8024
+            initialDelaySeconds: 30
+            periodSeconds: 20
+  volumeClaimTemplates:
+    - metadata:
+        name: axon-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
+    - metadata:
+        name: axon-events
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 5Gi
