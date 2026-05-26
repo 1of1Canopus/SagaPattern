@@ -3,11 +3,13 @@ package io.housedevinci.sagapattern.choreography;
 import io.housedevinci.sagapattern.choreography.config.KafkaTopics;
 import io.housedevinci.sagapattern.choreography.event.*;
 import io.housedevinci.sagapattern.choreography.producer.OrderEventProducer;
+import io.housedevinci.sagapattern.config.AxonTestConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Import;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.context.TestPropertySource;
@@ -32,6 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     "axon.axonserver.enabled=false",
     "spring.kafka.bootstrap-servers=${spring.embedded.kafka.brokers}"
 })
+@Import(AxonTestConfig.class)
 class ChoreographyIntegrationTest {
 
     @TestConfiguration

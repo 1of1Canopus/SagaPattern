@@ -1,7 +1,9 @@
 package io.housedevinci.sagapattern;
 
+import io.housedevinci.sagapattern.config.AxonTestConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.context.TestPropertySource;
 
@@ -11,6 +13,7 @@ import org.springframework.test.context.TestPropertySource;
     "axon.axonserver.enabled=false",
     "spring.kafka.bootstrap-servers=${spring.embedded.kafka.brokers}"
 })
+@Import(AxonTestConfig.class)
 class SagaPatternApplicationTests {
 
     @Test
