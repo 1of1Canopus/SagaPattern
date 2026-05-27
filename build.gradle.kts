@@ -33,6 +33,9 @@ dependencies {
 
     // Axon Framework — Orchestrator saga
     implementation("org.axonframework:axon-spring-boot-starter:${property("axonVersion")}")
+    // Axon's Jackson serializer deps are optional in the POM, so must be declared explicitly
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.19.2")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.19.2")
 
     // Kafka — Choreography saga
     implementation("org.springframework.kafka:spring-kafka")
