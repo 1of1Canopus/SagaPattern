@@ -33,7 +33,8 @@ public class PaymentConsumer {
             String paymentId = UUID.randomUUID().toString();
             log.info("[CHOREOGRAPHY] PaymentConsumer: payment {} processed for order {}", paymentId, event.orderId());
             kafkaTemplate.send(KafkaTopics.PAYMENT_PROCESSED, event.orderId(),
-                new PaymentProcessedEvent(paymentId, event.orderId(), event.amount(), event.simulateFailure()));
+                new PaymentProcessedEvent(paymentId, event.orderId(), event.amount(), event.simulateFailure(),
+                    event.productId(), event.quantity()));
         }
     }
 
